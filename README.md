@@ -2,7 +2,7 @@
 Desenvolvedor: Danilo Martins Caldeira.
 
 # Notas: 
-- 10/10/2025: inicialização do projeto e feito a Seção 1: Introdução.
+- 10/10/2025: inicialização do projeto e feito a Seção 1: Introdução. Foi feito a introdução e a Seção II, instalando todas as necessidades. 
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
