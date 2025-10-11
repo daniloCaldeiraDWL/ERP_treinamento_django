@@ -2,15 +2,10 @@
 Desenvolvedor: Danilo Martins Caldeira.
 
 # Notas: 
-- 08/10/2025: comecei vendo o tutorial (https://www.youtube.com/watch?v=ZXli2MJyRyk) até o minuto 17:50 deixando pronto o método criar. 
-- 08/10/2025: visto o tutorial até o minuto 31:01, com os métodos de criar e deletar finalizando
-- 08/10/2025: finalizado o treinamento com uma aplicação simples capaz de criar/atualizar/ler/deletar alunos 
+- 10/10/2025
 
 # Sobre o Macro-projeto:
-Neste repositório encontram-se vários treinamentos focados em Django. Consolidaremos aqui aplicações para agrupar uma base de treinamento, exemplos, práticas e desenvolvimentos genéricos de vários projetos. Cada projeto foca em uma temática específica, geralmente muito clara, sendo o próprio nome do projeto. Assim, conseguimos reunir e concentrar vários temas em um só lugar, facilitando consultas fururas. Os projetos serão mapeados nos milestrones. 
-
-## Projeto CRUD with Django"
-Base de estudo: https://www.youtube.com/watch?v=ZXli2MJyRyk
+Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
 
 ## Ambiente virtual: 
 Versão Python: 3.10.10
