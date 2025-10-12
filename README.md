@@ -3,6 +3,7 @@ Desenvolvedor: Danilo Martins Caldeira.
 
 # Notas: 
 - 10/10/2025: inicialização do projeto e feito a Seção 1: Introdução. Foi feito a introdução e a Seção II, instalando todas as necessidades. 
+- 11/10/2025: 
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
@@ -56,6 +57,14 @@ Podemos, agora acessar o serviço com o link gerado. Entre muitas funcoes.
 2. Executamos o comando: ```python manage.py makemigrations```
 3. Em alguns casos, vamos ter que tratar casos como novos campos não nulos etc. 
 4. Após a migração, podemos executar: ```python manage.py migrate```
+
+### Django rest framework
+- Instalação: 
+- ```pip install djangorestframework```
+- ```pip install markdown```
+- ```pip install django-filter```
+
+- Para uso é necessário inserir o aplicativo nos INSTALLED_APPS em core/settings.py com o comando: ```'rest_framework',```
 
 ## Rotinas de trabalho com Branch isoladas de desenvolvimento
 - Criar uma branch: ```git checkout -b brach/minha-nova-branch```
