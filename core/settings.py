@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+import os
+from dotenv import load_dotenv
+load_dotenv()  # carrega as variáveis do arquivo .env
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,12 +79,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+# para o banco MySQL, tenho que executar: pip install mysqlclient
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('USER_MYSQL_DB'),
+        'USER': os.getenv('USER_MYSQL'),
+        'PASSWORD': os.getenv('USER_MYSQL_PASSWORD'),
+        'PORT': os.getenv('USER_MYSQL_PORT'),
     }
-}
+} # caso nao haja o banco, criar com o heidisql com o nome definido em USER_MYSQL_DB.
 
 
 # Password validation
