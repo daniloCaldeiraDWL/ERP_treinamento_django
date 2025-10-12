@@ -44,9 +44,13 @@ INSTALLED_APPS = [
 
     # Django REST Framework
     'rest_framework',
+
+    # Django cors headers
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware", # para o django cors headers
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,6 +79,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+# Domínios são os domínios que podem fazer requisições para a API
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+# ]
+
+CORS_ALLOW_ALL_ORIGINS: bool = True # permite todas as origens fazerem requisições para a API
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
