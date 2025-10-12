@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 import os
 from dotenv import load_dotenv
@@ -44,9 +45,16 @@ INSTALLED_APPS = [
 
     # Django REST Framework
     'rest_framework',
+
+    # Django cors headers
+    "corsheaders",
+
+    # Apps
+    "auth",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware", # para o django cors headers
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,6 +83,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+# Domínios são os domínios que podem fazer requisições para a API
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+# ]
+
+CORS_ALLOW_ALL_ORIGINS: bool = True # permite todas as origens fazerem requisições para a API
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -133,3 +150,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configurações do Django REST Framework JWT
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+# Configurações do JWT
+SIMPLE_JWT = {
+    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5), # tempo de vida do token, padrão 5 minutos, configuramos para 1 dia
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),  # tempo de vida do token de acesso
+}
