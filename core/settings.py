@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 import os
 from dotenv import load_dotenv
@@ -146,3 +147,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configurações do Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+# Configurações do JWT
+SIMPLE_JWT = {
+    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5), # tempo de vida do token, padrão 5 minutos, configuramos para 1 dia
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),  # tempo de vida do token de acesso
+}
