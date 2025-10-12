@@ -3,7 +3,8 @@ Desenvolvedor: Danilo Martins Caldeira.
 
 # Notas: 
 - 10/10/2025: inicialização do projeto e feito a Seção 1: Introdução. Foi feito a introdução e a Seção II, instalando todas as necessidades. 
-- 11/10/2025: 
+- 11/10/2025: criação do core, utilização do Django REST Framework e Django cors headers.
+- 12/10/2025: configuração do Django JWT, apresentação do conceito de Apps no Django. Achei super interessante que posso fazer um app e depois simplesmente copiá-lo para outro projeto e apenas importá-lo no core/settings.py
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
@@ -59,12 +60,26 @@ Podemos, agora acessar o serviço com o link gerado. Entre muitas funcoes.
 4. Após a migração, podemos executar: ```python manage.py migrate```
 
 ### Django rest framework
+- Documentação: https://www.django-rest-framework.org/
 - Instalação: 
 - ```pip install djangorestframework```
 - ```pip install markdown```
 - ```pip install django-filter```
 
 - Para uso é necessário inserir o aplicativo nos INSTALLED_APPS em core/settings.py com o comando: ```'rest_framework',```
+
+### Django cors headers
+Biblioteca ligada com segurança de requisições na API que estamos desenvolvendo. Ela oferece uma camada extra de segurança ppara nossa API. 
+- Documentação: https://pypi.org/project/django-cors-headers/
+- Instalação: ```pip install django-cors-headers```
+- Instruções de instalação e configuração estão na documentação. Precisa configurar no core/settings.py
+
+### Django Rest Framework JWT
+- Documentação: https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+- Instalação: ```pip install djangorestframework-simplejwt```
+- Instruções de instalação e configuração estão na documentação. Precisa configurar no core/settings.py
+- Em Settings, eu tenho várias configurações que eu posso fazer com a biblioteca. 
+
 
 ## Rotinas de trabalho com Branch isoladas de desenvolvimento
 - Criar uma branch: ```git checkout -b brach/minha-nova-branch```
