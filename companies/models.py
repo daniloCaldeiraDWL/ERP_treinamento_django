@@ -6,3 +6,7 @@ class Enterprise(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Employee(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
