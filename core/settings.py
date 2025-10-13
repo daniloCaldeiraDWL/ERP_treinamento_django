@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     "corsheaders",
 
     # Apps
-    "auth",
+    "accounts",
+    "companies",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.User' # define o model User customizado para ser o model de usuário padrão do Djangopy 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
