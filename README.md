@@ -6,6 +6,7 @@ Desenvolvedor: Danilo Martins Caldeira.
 - 11/10/2025: criação do core, utilização do Django REST Framework e Django cors headers.
 - 12/10/2025: configuração do Django JWT, apresentação do conceito de Apps no Django. Achei super interessante que posso fazer um app e depois simplesmente copiá-lo para outro projeto e apenas importá-lo no core/settings.py
 - 12/10/2025: Inicialização da seção 4, visto até a aula 17.
+- 12/10/2025: Aula 19 foi feita até o minuto 19:34
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.

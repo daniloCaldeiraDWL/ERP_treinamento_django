@@ -1,4 +1,4 @@
-from rest_framework import authenticationFailed, APIException
+from rest_framework.exceptions import AuthenticationFailed, APIException
 from accounts.models import User
 from companies.models import Enterprise, Employee
 from django.contrib.auth.hashers import check_password, make_password
