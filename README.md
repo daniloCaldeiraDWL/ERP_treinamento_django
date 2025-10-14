@@ -7,7 +7,7 @@ Desenvolvedor: Danilo Martins Caldeira.
 - 12/10/2025: configuração do Django JWT, apresentação do conceito de Apps no Django. Achei super interessante que posso fazer um app e depois simplesmente copiá-lo para outro projeto e apenas importá-lo no core/settings.py
 - 12/10/2025: Inicialização da seção 4, visto até a aula 17.
 - 12/10/2025: Aula 19 foi feita até o minuto 19:34
-- 13/10/2025: 
+- 13/10/2025: Finalizado a seção 4. Tenho que resolver apenas um erro no método user... do final, eu tenho que conseguir executar. 
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
