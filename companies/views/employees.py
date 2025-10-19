@@ -11,9 +11,15 @@ from rest_framework.exceptions import APIException
 
 
 class Employees(Base):
+    """View para gerenciar funcionários dentro da empresa do usuário autenticado."""
+
     permission_classes = [EmployeesPermission]
 
     def get(self, request):
+        """Obtém todos os funcionários associados à empresa do usuário autenticado, exceto o dono da empresa.
+        Args:
+            request: Objeto de requisição HTTP."""
+
         enterprise_id = self.get_enterprise_id(request.user.id)
 
         # Get owner of enterprise
@@ -26,6 +32,10 @@ class Employees(Base):
         return Response({"employees": serializer.data})
     
     def post(self, request):
+        """Cria um novo funcionário dentro da empresa do usuário autenticado.
+        Args:
+            request: Objeto de requisição HTTP."""
+
         name = request.data.get('name')
         email = request.data.get('email')
         password = request.data.get('password')
@@ -47,9 +57,13 @@ class Employees(Base):
 
 
 class EmployeeDetail(Base):
+    """View para gerenciar um funcionário específico dentro da empresa do usuário autenticado."""
+
     permission_classes = [EmployeesPermission]
 
     def get(self, request, employee_id):
+        """Obtém os detalhes de um funcionário específico dentro da empresa do usuário autenticado."""
+
         employee = self.get_employee(employee_id, request.user.id)
 
         serializer = EmployeeSerializer(employee)
@@ -57,6 +71,12 @@ class EmployeeDetail(Base):
         return Response(serializer.data)
     
     def put(self, request, employee_id):
+        """Atualiza os dados de um funcionário específico dentro da empresa do usuário autenticado.
+        Args:
+            request: Objeto de requisição HTTP.
+            employee_id: ID do funcionário a ser atualizado.
+        """
+
         groups = request.data.get('groups')
 
         employee = self.get_employee(employee_id, request.user.id)
@@ -88,6 +108,12 @@ class EmployeeDetail(Base):
         return Response({"success": True})
 
     def delete(self, request, employee_id):
+        """Remove um funcionário específico da empresa do usuário autenticado.
+        Args:
+            request: Objeto de requisição HTTP.
+            employee_id: ID do funcionário a ser removido.
+        """
+
         employee = self.get_employee(employee_id, request.user.id)
 
         check_if_owner = User.objects.filter(id=employee.user.id, is_owner=1).exists()
