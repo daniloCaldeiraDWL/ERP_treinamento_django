@@ -4,7 +4,11 @@ from accounts.models import User
 from companies.models import Enterprise, Employee
 
 class Authentication:
+    """Classe para autenticação e cadastro de usuários."""
+
     def signin(self, email=None, password=None) -> User:
+        """Realiza a autenticação do usuário com email e senha."""
+
         exception_auth = AuthenticationFailed('Email e/ou senha incorreto(s)')
 
         user_exists = User.objects.filter(email=email).exists()
@@ -20,6 +24,8 @@ class Authentication:
         return user
     
     def signup(self, name, email, password, type_account='owner', company_id=False):
+        """Realiza o cadastro do usuário."""
+        
         if not name or name == '':
             raise APIException('O nome não deve ser null')
         

@@ -17,7 +17,6 @@ class TaskStatus(models.Model):
     name = models.CharField(max_length=155)
     codename = models.CharField(max_length=100)
 
-
     class Meta:
         db_table = 'campanies_task_status'
 

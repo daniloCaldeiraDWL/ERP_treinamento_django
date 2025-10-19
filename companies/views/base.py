@@ -11,52 +11,52 @@ class Base(APIView):
     def get_enterprise_id(self, user_id):
         """Obtém o ID da empresa associada a um usuário."""
 
-        employee = Employee.objects.filter(user_id=user_id).first()
-        owner = Enterprise.objects.filter(user_id=user_id).first()
+        employee = Employee.objects.filter(user_id=user_id).first() # Obtém o funcionário associado ao usuário
+        owner = Enterprise.objects.filter(user_id=user_id).first() # Obtém o dono da empresa associado ao usuário
 
-        if employee:
-            return employee.enterprise_id
+        if employee: # se for funcionário
+            return employee.enterprise_id # Retorna o ID da empresa do funcionário
 
-        return owner.id
+        return owner.id # Retorna o ID da empresa do dono
         
     def get_employee(self, employee_id, user_id):
         """Obtém um funcionário pelo ID."""
 
-        enterprese_id = self.get_enterprise_id(user_id)
+        enterprise_id = self.get_enterprise_id(user_id) # Obtém o ID da empresa do usuário autenticado
 
-        employee = Employee.objects.filter(id=employee_id, enterprise_id=enterprese_id).first()
+        employee = Employee.objects.filter(id=employee_id, enterprise_id=enterprise_id).first() # Obtém o funcionário pelo ID e empresa
 
-        if not employee:
-            raise NotFoundEmployee()
+        if not employee: # Se não encontrar o funcionário
+            raise NotFoundEmployee() # Lança exceção de funcionário não encontrado
         
-        return employee
+        return employee # Retorna o funcionário encontrado
     
     def get_group(self, group_id, enterprise_id):
         """Obtém um grupo pelo ID."""
 
-        group = Group.objects.values('name').filter(id=group_id, enterprise_id=enterprise_id).first()
+        group = Group.objects.values('name').filter(id=group_id, enterprise_id=enterprise_id).first() # Obtém o grupo pelo ID e empresa
 
-        if not group:
-            raise NotFoundGroup()
+        if not group: # Se não encontrar o grupo
+            raise NotFoundGroup() # Lança exceção de grupo não encontrado
 
-        return group
+        return group # Retorna o grupo encontrado
     
     def get_status(self, status_id):
         """Obtém o status da tarefa pelo ID."""
 
-        status = TaskStatus.objects.filter(id=status_id).first()
+        status = TaskStatus.objects.filter(id=status_id).first() # Obtém o status da tarefa pelo ID
 
-        if not status:
-            raise NotFoundTaskStatus()
+        if not status: # Se não encontrar o status
+            raise NotFoundTaskStatus() # Lança exceção de status não encontrado
 
-        return status
+        return status # Retorna o status encontrado
     
     def get_task(self, task_id, enterprise_id):
-        """Obtém a tarefa pelo ID."""
+        """Obtém a tarefa pelo ID.""" 
 
-        task = Task.objects.filter(id=task_id, enterprise_id=enterprise_id).first()
+        task = Task.objects.filter(id=task_id, enterprise_id=enterprise_id).first() # Obtém a tarefa pelo ID e empresa
 
-        if not task:
-            raise NotFoundTask()
-
-        return task
+        if not task: # Se não encontrar a tarefa
+            raise NotFoundTask() # Lança exceção de tarefa não encontrada
+ 
+        return task # Retorna a tarefa encontrada

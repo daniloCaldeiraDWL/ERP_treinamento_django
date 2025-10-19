@@ -7,11 +7,15 @@ from rest_framework.views import Response
 from django.contrib.auth.models import Permission
 
 class PermissionDetail(Base):
-    permission_classes = [GroupsPermission]
+    """View para obter todos os grupos disponíveis para a empresa do usuário autenticado."""
+
+    permission_classes = [GroupsPermission] # Garante que o usuário tenha permissão para acessar os grupos
 
     def get(self, request):
-        permissions = Permission.objects.filter(content_type_id__in=[2, 7, 11, 13]).all()
+        """Obtém todos os grupos disponíveis para a empresa do usuário autenticado."""
 
-        serializer = PermissionSerializer(permissions, many=True)
+        permissions = Permission.objects.filter(content_type_id__in=[2, 7, 11, 13]).all() # Obtém todas as permissões relevantes
 
-        return Response({"permissions": serializer.data})
+        serializer = PermissionSerializer(permissions, many=True) # Serializa os dados dos grupos
+
+        return Response({"permissions": serializer.data}) # Retorna a resposta com os dados dos grupos
