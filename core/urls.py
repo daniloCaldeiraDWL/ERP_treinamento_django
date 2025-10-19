@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/', include('accounts.urls')), # inclusao as rotas da app accounts
+    path('api/v1/auth/', include('accounts.urls')), # inclusao as rotas da app accounts
+    path('api/v1/companies/', include('companies.urls')), # inclusao as rotas da app companies
 ]
