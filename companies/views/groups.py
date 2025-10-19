@@ -129,7 +129,9 @@ class GroupDetail(Base):
 
             except ValueError:
                 raise APIException('Envie as permissões no padrão correto') # Levanta uma exceção se houver um erro de conversão de tipo
-            
+
+        return Response({"success": True}) # Retorna uma resposta de sucesso    
+        
     def delete(self, request, group_id):
         """Deleta um grupo específico pelo ID."""
 
