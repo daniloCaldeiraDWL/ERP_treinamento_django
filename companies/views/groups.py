@@ -65,11 +65,6 @@ class Groups(Base):
                             permission_id=int(item)
                         ) # Cria uma associação entre o grupo recém-criado e cada permissão fornecida
 
-                    Group_Permissions.objects.create(
-                        group_id=create_group.id,
-                        permission_id=int(item)
-                    ) # Cria uma associação entre o grupo recém-criado e cada permissão fornecida
-
             except ValueError:
                 create_group.delete()  # Deleta o grupo criado anteriormente em caso de erro
                 raise APIException('Envie as permissões no padrão correto') # Levanta uma exceção se houver um erro de conversão de tipo
@@ -96,13 +91,21 @@ class GroupDetail(Base):
     
     def put(self, request, group_id):
         """Atualiza os detalhes de um grupo específico pelo ID."""
-
+    
         enterprise_id = self.get_enterprise_id(request.user.id) # Obtém o ID da empresa associada ao usuário
 
         self.get_group(group_id, enterprise_id) # Verifica se o grupo existe na empresa
 
         name = request.data.get('name') # Obtém o novo nome do grupo a partir dos dados da requisição
         permissions = request.data.get('permissions') # Obtém as novas permissões do grupo a
+
+        # não permito atualizar sem o nome
+        if not name:
+            raise RequiredFields() # Levanta uma exceção se o nome não for fornecido
+
+        # não permite nomes duplicados na mesma empresa
+        if name and Group.objects.filter(name=name, enterprise_id=enterprise_id).exclude(id=group_id).exists():
+            raise APIException('Já existe um grupo com esse nome nesta empresa.') # Levanta uma exceção se o grupo já existir na empresa com o mesmo nome
 
         if name:
             Group.objects.filter(id=group_id).update(
