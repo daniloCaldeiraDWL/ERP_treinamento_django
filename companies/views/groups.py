@@ -16,6 +16,8 @@ class Groups(Base):
     permission_classes = [GroupsPermission]
 
     def get(self, request):
+        """Obtém todos os grupos associados à empresa do usuário autenticado."""
+
         enterprise_id = self.get_enterprise_id(request.user.id) # Obtém o ID da empresa associada ao usuário
         groups = Group.objects.filter(enterprise_id=enterprise_id).all() # Filtra os grupos pela empresa, pegando todos os grupos
 
@@ -24,6 +26,8 @@ class Groups(Base):
         return Response({"groups": serializer.data}) # Retorna a resposta com os dados serializados de todos os grupos cadastrados na empresa que consequentemente, estão cadastrados também no meu banco de dados.
 
     def post(self, request):
+        """Cria um novo grupo dentro da empresa do usuário autenticado. Não é permitido criar grupos com nomes duplicados na mesma empresa."""
+
         enterprise_id = self.get_enterprise_id(request.user.id) # Obtém o ID da empresa associada ao usuário
 
         name = request.data.get('name') # Obtém o nome do grupo a partir dos dados da requisição
@@ -31,6 +35,10 @@ class Groups(Base):
 
         if not name:
             raise RequiredFields # Levanta uma exceção se o nome não for fornecido 
+        
+        # garante que o grupo não exista na empresa
+        if Group.objects.filter(name=name, enterprise_id=enterprise_id).exists():
+            raise APIException('Já existe um grupo com esse nome nesta empresa.') # Levanta uma exceção se o grupo já existir na empresa
         
         create_group = Group.objects.create(
             name=name,
@@ -102,7 +110,7 @@ class GroupDetail(Base):
             ) # Atualiza o nome do grupo se fornecido
 
         Group_Permissions.objects.filter(group_id=group_id).delete() # Remove todas as permissões associadas ao grupo antes de adicionar as novas
-
+    
         if permissions:
             permissions = permissions.split(',') # Divide a string de permissões em uma lista, assumindo que estão separadas por vírgulas
             # recebe "1, 2, 3" e transforma em [1, 2, 3] (uma lista iterável)
@@ -116,16 +124,11 @@ class GroupDetail(Base):
                         raise APIException(f'Permissão {item} não existe.') # Levanta uma exceção se a permissão não existir
 
                     # verifica se a permissão já está associada ao grupo
-                    if not Group_Permissions.objects.filter(group_id=group_id, permission_id=int(item)).exists():
+                    if not Group_Permissions.objects.filter(group_id=group_id, permission_id=item).exists():
                         Group_Permissions.objects.create(
                             group_id=group_id,
-                            permission_id=int(item)
+                            permission_id=item
                         ) # Cria uma associação entre o grupo recém-criado e cada permissão fornecida
-
-                    Group_Permissions.objects.create(
-                        group_id=group_id,
-                        permission_id=int(item)
-                    ) # Cria uma associação entre o grupo recém-criado e cada permissão fornecida
 
             except ValueError:
                 raise APIException('Envie as permissões no padrão correto') # Levanta uma exceção se houver um erro de conversão de tipo
