@@ -44,7 +44,7 @@ def check_permission(user, method, permissions_to) -> bool:
                 # Se a permissão não for encontrada em nenhum grupo, retorna False por padrão
 
 
-class EmployeePermission(permissions.BasePermission):
+class EmployeesPermission(permissions.BasePermission):
     """Classe personalizada para verificar se o usuário tem permissão para acessar funcionários."""
 
     message = 'Usuário não tem permissão para gerenciar os funcionários.'
@@ -52,7 +52,7 @@ class EmployeePermission(permissions.BasePermission):
     def has_permission(self, request, _view) -> bool | None:
         return check_permission(request.user, request.method, permissions_to='employee')
     
-class GroupPermission(permissions.BasePermission):
+class GroupsPermission(permissions.BasePermission):
     """Classe personalizada para verificar se o usuário tem permissão para acessar grupos."""
 
     message = 'Usuário não tem permissão para gerenciar os grupos.'
@@ -60,7 +60,7 @@ class GroupPermission(permissions.BasePermission):
     def has_permission(self, request, _view) -> bool | None:
         return check_permission(request.user, request.method, permissions_to='group')
     
-class GroupPermissionView(permissions.BasePermission):
+class GroupsPermissionsPermission(permissions.BasePermission):
     """Classe personalizada para verificar se o usuário tem permissão para gerenciar as permissões dos grupos."""
 
     message = 'Usuário não tem permissão para gerenciar os grupos de permissões.'
@@ -71,7 +71,7 @@ class GroupPermissionView(permissions.BasePermission):
 class TaskPermission(permissions.BasePermission):
     """Classe personalizada para verificar se o usuário tem permissão para acessar tarefas."""
 
-    message = 'Usuário não tem permissão para gerenciar as tarefas.'
+    message = 'O funcionário não tem permissão para gerenciar as tarefas de todos os funcionários'
 
-    def has_permission(self, request, _view) -> bool | None:
-        return check_permission(request.user, request.method, permissions_to='task')
+    def has_permission(self, request, _view):
+        return check_permission(request.user, request.method, permission_to='task')
