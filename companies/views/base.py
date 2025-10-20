@@ -15,7 +15,7 @@ class Base(APIView):
         owner = Enterprise.objects.filter(user_id=user_id).first() # Obtém o dono da empresa associado ao usuário
 
         if employee: # se for funcionário
-            return employee.enterprise_id # Retorna o ID da empresa do funcionário
+            return employee.enterprise.id # Retorna o ID da empresa do funcionário
 
         return owner.id # Retorna o ID da empresa do dono
         
@@ -27,7 +27,7 @@ class Base(APIView):
         employee = Employee.objects.filter(id=employee_id, enterprise_id=enterprise_id).first() # Obtém o funcionário pelo ID e empresa
 
         if not employee: # Se não encontrar o funcionário
-            raise NotFoundEmployee() # Lança exceção de funcionário não encontrado
+            raise NotFoundEmployee # Lança exceção de funcionário não encontrado
         
         return employee # Retorna o funcionário encontrado
     
@@ -37,7 +37,7 @@ class Base(APIView):
         group = Group.objects.values('name').filter(id=group_id, enterprise_id=enterprise_id).first() # Obtém o grupo pelo ID e empresa
 
         if not group: # Se não encontrar o grupo
-            raise NotFoundGroup() # Lança exceção de grupo não encontrado
+            raise NotFoundGroup # Lança exceção de grupo não encontrado
 
         return group # Retorna o grupo encontrado
     
@@ -47,7 +47,7 @@ class Base(APIView):
         status = TaskStatus.objects.filter(id=status_id).first() # Obtém o status da tarefa pelo ID
 
         if not status: # Se não encontrar o status
-            raise NotFoundTaskStatus() # Lança exceção de status não encontrado
+            raise NotFoundTaskStatus # Lança exceção de status não encontrado
 
         return status # Retorna o status encontrado
     
@@ -57,6 +57,6 @@ class Base(APIView):
         task = Task.objects.filter(id=task_id, enterprise_id=enterprise_id).first() # Obtém a tarefa pelo ID e empresa
 
         if not task: # Se não encontrar a tarefa
-            raise NotFoundTask() # Lança exceção de tarefa não encontrada
+            raise NotFoundTask # Lança exceção de tarefa não encontrada
  
         return task # Retorna a tarefa encontrada

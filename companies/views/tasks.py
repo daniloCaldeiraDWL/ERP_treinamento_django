@@ -31,7 +31,7 @@ class Tasks(Base):
         Args:
             request: Objeto de requisição HTTP."""
 
-        employee_id = self.get('employee_id') # Obtém o ID do funcionário associado ao usuário autenticado
+        employee_id = request.data.get('employee_id') # Obtém o ID do funcionário associado ao usuário autenticado
         title = request.data.get('title') # Obtém o título da tarefa a partir dos dados da requisição
         description = request.data.get('description') # Obtém a descrição da tarefa a partir dos dados da requisição
         status_id = request.data.get('status_id') # Obtém o ID do status da tarefa a partir dos dados da requisição
@@ -41,27 +41,28 @@ class Tasks(Base):
         _status = self.get_status(status_id) # Obtém o status da tarefa pelo ID
 
         # Validadores
-        if not title or len(title) < 175:
+        if not title or len(title) > 175:
             raise APIException('O título é obrigatório e deve ter no máximo 175 caracteres.') # Levanta uma exceção se o título não for fornecido ou exceder o limite de caracteres
 
         if due_date:
             try:
-                due_date = datetime.datetime.strptime(due_date, '%d-%m-%Y %H:%M') # Converte a string da data de vencimento para um objeto date
+                due_date = datetime.datetime.strptime(
+                    due_date, "%d/%m/%Y %H:%M") # Converte a string da data de vencimento para um objeto date
             except ValueError:
-                raise APIException('Data de vencimento inválida. Use o formato DD-MM-AAAA HH:MM.', 'date_invalid') # Levanta uma exceção se a data de vencimento estiver em um formato inválido
+                raise APIException('Data de vencimento inválida. Use o formato DD/MM/AAAA HH:MM.', 'date_invalid') # Levanta uma exceção se a data de vencimento estiver em um formato inválido
 
         task = Task.objects.create(
             title=title,
             description=description,
             due_date=due_date,
             employee_id=employee_id,
-            enterprise_id=employee.enterprise_id,
+            enterprise_id=employee.enterprise.id,
             status_id=status_id
         ) # Cria uma nova tarefa com os dados fornecidos
 
-        Serializer = TaskSerializer(task) # Serializa os dados da tarefa criada
+        serializer = TaskSerializer(task) # Serializa os dados da tarefa criada
 
-        return Response(Serializer.data, status=201) # Retorna a resposta com os dados da tarefa criada
+        return Response({"task": serializer.data}) # Retorna a resposta com os dados da tarefa criada
     
 class TaskDetail(Base):
     """View para gerenciar detalhes de uma tarefa específica."""
