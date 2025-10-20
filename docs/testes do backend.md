@@ -37,3 +37,13 @@ Primeiro, eu tenho que fazer o login na aplicação, obtendo o token.
 - DELETE: http://127.0.0.1:8000/api/v1/companies/groups/10
     - Deleta um grupo pelo id. 
     - Não apaga, logicamente se ele não existe. 
+
+## Testes da tebala de tarefas
+- GET: http://127.0.0.1:8000/api/v1/companies/tasks
+    - Obtem todas as tarefas cadastradas na empresa. 
+- POST: http://127.0.0.1:8000/api/v1/companies/tasks
+    - Cadastra uma tarefa. É necessário passar alguns parâmetros. 
+- PUT: http://127.0.0.1:8000/api/v1/companies/tasks/5 (sendo 5 o id)
+    - Atualiza os dados de uma tarefa
+- DETELE: http://127.0.0.1:8000/api/v1/companies/tasks/5
+    - Deleta os dados de uma tarefa
