@@ -23,9 +23,9 @@ class TaskStatus(models.Model):
 class Task(models.Model):
     title = models.TextField(max_length=175)
     description = models.TextField(null=True)
-    due_date = models.DateField(null=True)
-    created_at = models.DateField(auto_now_add=True) # seta automaticamente a data de criação da tarefa
-    updated_at = models.DateField(null=True) # seta automaticamente a data de atualização da tarefa, podendo ser nula (ao criar a tarefa)
+    due_date = models.DateTimeField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True) # seta automaticamente a data de criação da tarefa
+    updated_at = models.DateTimeField(null=True) # seta automaticamente a data de atualização da tarefa, podendo ser nula (ao criar a tarefa)
     status = models.ForeignKey(TaskStatus, on_delete=models.CASCADE) # relacionamento com o status da tarefa
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE) # relacionamento com a empresa
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE) # relacionamento com o funcionário
