@@ -21,7 +21,7 @@ class TaskStatus(models.Model):
         db_table = 'campanies_task_status'
 
 class Task(models.Model):
-    title = models.TextField(max_length=175)
+    title = models.TextField()
     description = models.TextField(null=True)
     due_date = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True) # seta automaticamente a data de criação da tarefa
