@@ -4,22 +4,34 @@ from accounts.models import User
 from companies.models import Enterprise, Employee
 
 class Authentication:
+    """Classe para autenticação e cadastro de usuários."""
+
     def signin(self, email=None, password=None) -> User:
-        exception_auth = AuthenticationFailed('Email e/ou senha incorreto(s)')
+        """Realiza a autenticação do usuário com email e senha."""
 
-        user_exists = User.objects.filter(email=email).exists()
-
-        if not user_exists:
-            raise exception_auth
+        if not email or email == '': # Verifica se o email foi fornecido
+            raise APIException('O email não deve ser null')
         
-        user = User.objects.filter(email=email).first()
+        if not password or password == '': # Verifica se a senha foi fornecida
+            raise APIException('O password não deve ser null')
 
-        if not check_password(password, user.password):
-            raise exception_auth
+        exception_auth = AuthenticationFailed('Email e/ou senha incorreto(s)') # Exceção para falha de autenticação
+
+        user_exists = User.objects.filter(email=email).exists() # Verifica se o usuário existe
+
+        if not user_exists: # Se o usuário não existir
+            raise exception_auth # Lança exceção de autenticação falhada
+        
+        user = User.objects.filter(email=email).first() # Obtém o usuário pelo email
+
+        if not check_password(password, user.password): # Verifica se a senha está correta
+            raise exception_auth # Lança exceção de autenticação falhada
         
         return user
     
     def signup(self, name, email, password, type_account='owner', company_id=False):
+        """Realiza o cadastro do usuário."""
+
         if not name or name == '':
             raise APIException('O nome não deve ser null')
         
