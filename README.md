@@ -12,6 +12,8 @@ Desenvolvedor: Danilo Martins Caldeira.
 - 19/10/2025: Todas aulas até a 26 estão feitas, erros tratados e tudo que foi esperado foi analisado na aula 26 em nota. 
 - 19/10/2025: Visto até aula 31, minuto 10:25. Preciso acertar alguns erros que estão acontecendo no PUT de tasks para finalizar a seção.
 - 20/10/2025: Correção dos erros que estavam pendentes de serem tratados para prosseguirmos para a Seção 6.  
+- 21/10/2025: Feito as provas do Djando
+- 21/10/2025: Início da seção 7: 
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
