@@ -10,7 +10,8 @@ Desenvolvedor: Danilo Martins Caldeira.
 - 13/10/2025: Finalizado a seção 4. Tenho que resolver apenas um erro no método user... do final, eu tenho que conseguir executar. 
 - 18/10/2025: Finalizado totalmente a versão 4. Inicio da seção 5 até a aula 24
 - 19/10/2025: Todas aulas até a 26 estão feitas, erros tratados e tudo que foi esperado foi analisado na aula 26 em nota. 
-- 19/10/2025: Visto até aula 31, minuto 10:25. Preciso acertar alguns erros que estão acontecendo no PUT de tasks para finalizar a seção. 
+- 19/10/2025: Visto até aula 31, minuto 10:25. Preciso acertar alguns erros que estão acontecendo no PUT de tasks para finalizar a seção.
+- 20/10/2025: Correção dos erros que estavam pendentes de serem tratados para prosseguirmos para a Seção 6.  
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
