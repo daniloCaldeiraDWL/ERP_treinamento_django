@@ -90,40 +90,44 @@ class TaskDetail(Base):
             task_id: ID da tarefa a ser atualizada."""
 
         enterprise_id = self.get_enterprise_id(request.user.id) # Obtém o ID da empresa associada ao usuário autenticado
-
         task = self.get_task(task_id, enterprise_id) # Obtém a tarefa pelo ID e empresa
 
-        # se vier da dados para atualizar, atualiza, se não, mantém o existente
-        title = request.data.get('title', task.title) # Obtém o novo título da tarefa ou mantém o existente
-        employee_id = self.get('employee_id', task.employee_id) # Obtém o ID do funcionário associado ao usuário autenticado ou mantém o existente
-        description = request.data.get('description', task.description) # Obtém a nova descrição da tarefa ou mantém a existente
-        status_id = request.data.get('status_id', task.status_id) # Obtém o novo ID do status da tarefa ou mantém o existente
-        due_date = request.data.get('due_date', task.due_date) # Obtém a nova data de vencimento da tarefa ou mantém a existente
-        
-        # validadores
-        self.get_status(status_id) # Verifica se o status da tarefa existe
-        self.get_employee(employee_id, request.user.id) # Verifica se o funcionário existe na empresa do usuário autenticado
+        title = request.data.get('title', task.title) # Obtém o título da tarefa a partir dos dados da requisição ou mantém o título atual
+        employee_id = request.data.get('employee_id', task.employee.id) # Obtém o ID do funcionário associado à tarefa a partir dos dados da requisição ou mantém o ID atual
+        description = request.data.get('description', task.description) # Obtém a descrição da tarefa a partir dos dados da requisição ou mantém a descrição atual
+        status_id = request.data.get('status_id', task.status.id) # Obtém o ID do status da tarefa a partir dos dados da requisição ou mantém o ID atual
+        due_date = request.data.get('due_date', task.due_date) # Obtém a data de vencimento da tarefa a partir dos dados da requisição ou mantém a data atual
+
+        # Validators
+        self.get_status(status_id) # Verifica se o status existe
+        self.get_employee(employee_id, request.user.id) # Verifica se o funcionário existe
+
+        if due_date and due_date != task.due_date:
+            try:
+                due_date = datetime.datetime.strptime(
+                    due_date, "%d/%m/%Y %H:%M")
+            except ValueError:
+                raise APIException(
+                    "A data deve ter o padrão: d/m/Y H:M", "date_invalid")
 
         data = {
-            'title': title,
-            'description': description,
-            'due_date': due_date
-        } # Prepara os dados para atualização
+            "title": title,
+            "description": description,
+            "due_date": due_date
+        } # Dados a serem atualizados na tarefa
 
         serializer = TaskSerializer(task, data=data, partial=True) # Serializa os dados da tarefa para atualização parcial
-        # estou envidando a tarefa existente, os novos dados e dizendo que é parcial
 
         if not serializer.is_valid():
-            raise APIException("Não foi possível atualizar a tarefa.") # Levanta uma exceção se os dados serializados forem inválidos
-        
-        serializer.update(task, serializer.validated_data) # Atualiza a tarefa com os dados validados
+            raise APIException("Não foi possível editar a tarefa")
 
-        # o serializer não tem capacidade de alterar uma chave estrangeira, assim eu tenho que fazer manualmente para status e employee
-        task.status_id = status_id # Atualiza o ID do status da tarefa que é uma chave estrangeira na tabela de tarefas
-        task.employee_id = employee_id # Atualiza o ID do funcionário associado à tarefa que é uma chave estrangeira na tabela de tarefas
+        serializer.update(task, serializer.validated_data) # Atualiza os dados da tarefa com os dados validados
+
+        task.status_id = status_id
+        task.employee_id = employee_id # Atualiza o ID do funcionário associado à tarefa
         task.save() # Salva as alterações na tarefa
 
-        return Response({"task": serializer.data}) # Retorna uma resposta de sucesso
+        return Response({"task": serializer.data}) # Retorna a resposta com os dados atualizados da tarefa
     
     def delete(self, request, task_id):
         """Deleta uma tarefa específica pelo ID.
