@@ -13,7 +13,10 @@ Desenvolvedor: Danilo Martins Caldeira.
 - 19/10/2025: Visto até aula 31, minuto 10:25. Preciso acertar alguns erros que estão acontecendo no PUT de tasks para finalizar a seção.
 - 20/10/2025: Correção dos erros que estavam pendentes de serem tratados para prosseguirmos para a Seção 6.  
 - 21/10/2025: Feito as provas do Djando
-- 21/10/2025: Início da seção 7: 
+- 21/10/2025: Início da seção 7: apresentando do que é o react na aula 34. Para melhor entendimento, vamos semppre anotar os conceitos vistos:
+  - React não é um framework, ele é uma biblioteca que está ao lado do cliente. 
+  - Apresentação do DOM, que é um documento, o que está na tela, na página e um diferencial do react que é o virtual DOM, que consegue alterar apenas parte do DOM real, sem ter que recarregar tudo. Este processo é o processo de reconciliação. Sincroniza os dom real com o virtual e o dom virtual fica dentro da memória. 
+  - Aula 37: começando a trabalhar com react
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
@@ -89,8 +92,21 @@ Biblioteca ligada com segurança de requisições na API que estamos desenvolven
 - Instruções de instalação e configuração estão na documentação. Precisa configurar no core/settings.py
 - Em Settings, eu tenho várias configurações que eu posso fazer com a biblioteca. 
 
+## Notas React
+- Criação de um projeto com react: ```npm create vite@latest```
+- Depois temos que informar o nome do projeto.
+- Selecionar o frame/lib, no caso react. 
+- Selecionar a variante. Vamso trabalhar com: TypeScript + SWC (moderna e mais recente)
+- Assim, já criamos nosso projeto. 
+Depois posso entrar na pasta do projeto que foi criado. 
+- cd pasta-caminho
+- Com o comando ```npm i``` eu faço as instalações que são necessárias. 
+- Com o camanho ```npm rum dev``` eu já coloco o servidor de desenvolvimento para rodar. 
+
+
 
 ## Rotinas de trabalho com Branch isoladas de desenvolvimento
+
 - Criar uma branch: ```git checkout -b brach/minha-nova-branch```
     - Fazer as alterações necessárias
 
