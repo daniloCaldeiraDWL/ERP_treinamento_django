@@ -17,6 +17,10 @@ Desenvolvedor: Danilo Martins Caldeira.
   - React não é um framework, ele é uma biblioteca que está ao lado do cliente. 
   - Apresentação do DOM, que é um documento, o que está na tela, na página e um diferencial do react que é o virtual DOM, que consegue alterar apenas parte do DOM real, sem ter que recarregar tudo. Este processo é o processo de reconciliação. Sincroniza os dom real com o virtual e o dom virtual fica dentro da memória. 
   - Aula 37: começando a trabalhar com react
+- 22/10/2025: Aulas sobre react e tsx. 
+  - Regra: um componente só retorna um elemento. Para contornar isso eu posso inserir um <> </> ou mesmo passando o fragment de forma explicita
+  - Regra:  não existe componentes que abre não fecha... sempre suar /> para fechar. 
+  - Visto até aula 42. 
 
 # Sobre o Macro-projeto:
 Este projeto é um treinamento seguindo os passos apresentados no Curso da Udemy: https://www.udemy.com/course/criando-um-sistema-para-gestao-empresarial-erp-2023/learn/lecture/41262470#overview.
